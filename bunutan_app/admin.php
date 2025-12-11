@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Admin Panel - Bunutan</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -10,7 +11,7 @@
     <div class="container">
         <header class="header">
             <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
-            <h1>🎄 Bunutan Admin Panel</h1>
+            <h1><a href="../index.html">🎄 Bunutan Admin Panel</a></h1>
             <p class="subtitle">Christmas Gift Exchange Management</p>
         </header>
 

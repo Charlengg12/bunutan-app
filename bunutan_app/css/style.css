@@ -111,6 +111,17 @@ body {
     margin-bottom: 10px;
 }
 
+.header h1 a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.header h1 a:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
 .subtitle {
     font-size: 1.1rem;
     color: var(--text-secondary);
