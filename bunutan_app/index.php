@@ -50,6 +50,11 @@
     <script src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme
+            if (typeof initTheme === 'function') {
+                initTheme();
+            }
+            
             // Get token from URL
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
@@ -93,6 +98,10 @@
                     setTimeout(() => {
                         showState('revealed-state');
                         animateReveal();
+                        // Create confetti animation
+                        if (typeof createConfetti === 'function') {
+                            createConfetti();
+                        }
                     }, 800);
                 } else {
                     showError(data.message || 'Failed to reveal partner');
