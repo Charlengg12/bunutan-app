@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Admin Panel - Bunutan</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="theme-toggle" onclick="toggleDarkMode()" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+            <h1><a href="../index.html">Bunutan Admin Panel</a></h1>
+            <p class="subtitle">Christmas Gift Exchange Management</p>
+        </header>
+
+        <main class="admin-main">
+            <!-- Statistics Dashboard -->
+            <section class="card" id="statistics-section" style="display: none;">
+                <h2>Statistics</h2>
+                <div class="stats-grid" id="stats-grid"></div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Participant Section -->
+            <section class="card" id="add-participant-section">
+                <h2>Add Participants</h2>
+                <form id="add-participant-form">
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            id="participant-name"
+                            placeholder="Enter participant name"
+                            required
+                            minlength="1"
+                        >
+                        <button type="submit" class="btn btn-primary">Add Participant</button>
+                    </div>
+                    <div class="error-message"></div>
+                </form>
+                <div class="bulk-import-section">
+                    <button type="button" class="bulk-import-toggle" onclick="toggleBulkImport()">Bulk Import (one per line or comma-separated)</button>
+                    <form id="bulk-import-form" class="bulk-import-form">
+                        <div class="form-group">
+                            <textarea
+                                id="bulk-names"
+                                placeholder="Enter names, one per line or separated by commas&#10;Example:&#10;John Doe&#10;Jane Smith&#10;Bob Johnson"
+                                rows="6"
+                            ></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Import All</button>
+                    </form>
+                </div>
+                <div id="add-participant-message" class="message"></div>
+            </section>
+
+            <!-- Participants List -->
+            <section class="card">
+                <h2>Participants (<span id="participant-count">0</span>)</h2>
+                <div class="search-box">
+                    <span class="search-icon">Search</span>
+                    <input
+                        type="text"
+                        id="participant-search"
+                        placeholder="Search participants..."
+                        oninput="filterParticipants()"
+                    >
+                </div>
+                <div id="participants-list" class="participants-list">
+                    <p class="empty-state">No participants added yet</p>
+                </div>
+            </section>
+
+            <!-- Gift Value Rules Section -->
+            <section class="card">
+                <h2>Gift Value Rules</h2>
+                <form id="gift-rules-form">
+                    <div class="form-group">
+                        <textarea
+                            id="gift-rules"
+                            placeholder="e.g., Gift value should be between $10 - $30"
+                            rows="4"
+                        ></textarea>
+                        <button type="submit" class="btn btn-secondary">Save Rules</button>
+                    </div>
+                </form>
+                <div id="gift-rules-message" class="message"></div>
+            </section>
+
+            <!-- Generate Draw Section -->
+            <section class="card">
+                <h2>Generate Draw</h2>
+                <p class="info-text">Once generated, you cannot add more participants. Make sure all participants are added first.</p>
+                <button id="generate-draw-btn" class="btn btn-success">Generate Draw</button>
+                <div id="generate-draw-message" class="message"></div>
+            </section>
+
+            <!-- Draw Results Section -->
+            <section class="card" id="draw-results-section" style="display: none;">
+                <h2>Draw Results & Participant Links</h2>
+                <p class="info-text">Share these unique links with each participant. They can click to reveal their secret gift partner.</p>
+                <div style="margin-bottom: 16px;">
+                    <button onclick="exportData()" class="btn btn-export">Export Data</button>
+                </div>
+                <div id="draw-results" class="draw-results"></div>
+            </section>
+
+            <!-- Reset Section -->
+            <section class="card danger-zone">
+                <h2>Danger Zone</h2>
+                <p class="info-text">Reset all data including participants, draw results, and settings. This action cannot be undone.</p>
+                <button id="reset-all-btn" class="btn btn-danger">Reset All Data</button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

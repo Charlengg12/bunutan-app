@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Bunutan - Christmas Gift Exchange</title>
     <style>
         :root {
-            --primary-color: #C41E3A;
-            --primary-dark: #8B1428;
-            --success-color: #2ECC71;
-            --danger-color: #E74C3C;
-            --warning-color: #F39C12;
-            --light-bg: #F9F9F9;
-            --white: #FFFFFF;
-            --text-dark: #2C3E50;
-            --text-light: #7F8C8D;
-            --border-color: #E0E0E0;
-            --gold: #FFD700;
+            --primary-color: #2d5f3f;
+            --secondary-color: #c41e3a;
+            --success-color: #28a745;
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --radius-md: 12px;
+            --radius-lg: 16px;
         }
 
         * {
@@ -26,11 +27,15 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1A1A1A 0%, #2C3E50 100%);
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         /* Navbar */

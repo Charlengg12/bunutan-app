@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunutan - Christmas Gift Exchange</title>
+    <link rel="stylesheet" href="bunutan_app/css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .hero-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .btn-hero {
+            padding: 16px 32px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero:hover {
+            background: #234a31;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 95, 63, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero-card {
+                padding: 40px 24px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-container">
+        <div class="hero-card">
+            <h1 class="hero-title">Bunutan</h1>
+            <p class="hero-subtitle">
+                A modern, minimalist platform for organizing your Christmas Secret Santa gift exchange
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <a href="bunutan_app/admin.html" class="feature-card">
+                <h3 class="feature-title">Admin Panel</h3>
+                <p class="feature-description">
+                    Manage participants, generate draws, and track the gift exchange progress
+                </p>
+            </a>
+
+            <div class="feature-card" style="cursor: default;">
+                <h3 class="feature-title">Participant View</h3>
+                <p class="feature-description">
+                    Participants receive unique links to reveal their secret gift partner
+                </p>
+            </div>
+
+            <div class="feature-card" style="cursor: default;">
+                <h3 class="feature-title">Live Statistics</h3>
+                <p class="feature-description">
+                    Real-time tracking of who has revealed their partner and completion progress
+                </p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to get started?</h2>
+            <a href="bunutan_app/admin.html" class="btn-hero">Go to Admin Panel</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: var(--text-secondary); font-size: 0.9rem;">
+            <p>Built with modern web technologies and powered by Supabase</p>
+        </div>
+    </div>
+</body>
+</html>
