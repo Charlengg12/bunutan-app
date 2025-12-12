@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Bunutan - Christmas Gift Exchange</title>
     <style>
         :root {
@@ -40,7 +38,7 @@
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: var(--white);
             padding: 1rem 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -77,7 +75,7 @@
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             border: none;
             color: var(--white);
             padding: 0.75rem 1.25rem;
@@ -89,7 +87,7 @@
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
         }
 
@@ -116,15 +114,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Card Component */
@@ -132,7 +123,7 @@
             background: var(--white);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin-bottom: 1.5rem;
             border: 1px solid var(--border-color);
         }
@@ -329,7 +320,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -347,7 +338,7 @@
             max-width: 550px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         .modal-header {
@@ -466,41 +457,15 @@
         }
 
         /* Utility */
-        .mt-1 {
-            margin-top: 1rem;
-        }
-
-        .mt-2 {
-            margin-top: 2rem;
-        }
-
-        .mb-1 {
-            margin-bottom: 1rem;
-        }
-
-        .mb-2 {
-            margin-bottom: 2rem;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .text-muted {
-            color: var(--text-light);
-        }
-
-        .success-text {
-            color: var(--success-color);
-        }
-
-        .danger-text {
-            color: var(--danger-color);
-        }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-muted { color: var(--text-light); }
+        .success-text { color: var(--success-color); }
+        .danger-text { color: var(--danger-color); }
 
         .two-column {
             display: grid;
@@ -515,12 +480,11 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
-            <div class="navbar-brand"><a href="./" style="color: inherit; text-decoration: none;">Bunutan</a></div>
+            <div class="navbar-brand">Bunutan</div>
             <div class="nav-tabs">
                 <button class="nav-btn active" onclick="switchTab('home')">🏠 Home</button>
                 <button class="nav-btn" onclick="switchTab('participant')">🎁 My Gift</button>
@@ -541,14 +505,12 @@
                     A magical way to organize your Secret Santa gift exchange!
                 </p>
                 <div class="grid" style="margin-top: 2rem;">
-                    <button class="stat-card" onclick="switchTab('participant')"
-                        style="cursor: pointer; border: none; transition: transform 0.3s; padding: 2.5rem;">
+                    <button class="stat-card" onclick="switchTab('participant')" style="cursor: pointer; border: none; transition: transform 0.3s; padding: 2.5rem;">
                         <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎁</div>
                         <div class="stat-label" style="font-size: 1rem;">Find My Gift</div>
                         <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">See who I'm buying for</p>
                     </button>
-                    <button class="stat-card" onclick="switchTab('admin')"
-                        style="cursor: pointer; border: none; transition: transform 0.3s; padding: 2.5rem;">
+                    <button class="stat-card" onclick="switchTab('admin')" style="cursor: pointer; border: none; transition: transform 0.3s; padding: 2.5rem;">
                         <div style="font-size: 3rem; margin-bottom: 0.5rem;">👑</div>
                         <div class="stat-label" style="font-size: 1rem;">Admin Panel</div>
                         <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">Manage the exchange</p>
@@ -562,26 +524,22 @@
                     <div style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎲</div>
                         <strong>Random Assignment</strong>
-                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Automatic Secret
-                            Santa pairing</p>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Automatic Secret Santa pairing</p>
                     </div>
                     <div style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
                         <strong>Budget Management</strong>
-                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Set and track
-                            spending limits</p>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Set and track spending limits</p>
                     </div>
                     <div style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
                         <strong>Wishlists</strong>
-                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Share gift
-                            preferences</p>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Share gift preferences</p>
                     </div>
                     <div style="text-align: center; padding: 1.5rem;">
                         <div style="font-size: 2rem; margin-bottom: 0.5rem;">✅</div>
                         <strong>Track Status</strong>
-                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Monitor purchase
-                            progress</p>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Monitor purchase progress</p>
                     </div>
                 </div>
             </div>
@@ -592,6 +550,7 @@
             <div class="card">
                 <div class="card-header">
                     🎁 My Secret Santa Assignment
+                    <button class="btn btn-primary btn-small" onclick="openModal('wislistModal')">📝 Update Wishlist</button>
                 </div>
 
                 <div id="assignmentContainer" style="display: none;">
@@ -600,8 +559,7 @@
                             <div style="font-size: 3rem;">🎉</div>
                         </div>
                         <div class="gift-card-recipient">
-                            I'm buying for: <span id="recipientName"
-                                style="color: var(--primary-color);">Loading...</span>
+                            I'm buying for: <span id="recipientName" style="color: var(--primary-color);">Loading...</span>
                         </div>
                         <div class="gift-details">
                             <div class="detail-item">
@@ -615,28 +573,37 @@
                             <div class="detail-item">
                                 <div class="detail-label">Status</div>
                                 <div class="detail-value">
-                                    <span class="badge badge-warning" id="purchaseStatus">Not Revealed</span>
+                                    <span class="badge badge-warning" id="purchaseStatus">Not Purchased</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group mt-2">
-                            <label>📄 Gift Guidelines</label>
-                            <div style="background: var(--light-bg); padding: 1rem; border-radius: 6px; min-height: 80px;"
-                                id="wishlistDisplay">
-                                <p class="text-muted text-center">No guidelines provided yet</p>
+                            <label>📄 Their Wishlist</label>
+                            <div style="background: var(--light-bg); padding: 1rem; border-radius: 6px; min-height: 80px;" id="wishlistDisplay">
+                                <p class="text-muted text-center">No wishlist provided yet</p>
                             </div>
+                        </div>
+
+                        <div class="two-column mt-2">
+                            <button class="btn btn-success" onclick="markPurchased()">✓ Mark as Purchased</button>
+                            <button class="btn btn-secondary" onclick="resetStatus()">↻ Reset Status</button>
                         </div>
                     </div>
                 </div>
 
                 <div id="noAssignmentContainer" style="text-align: center; padding: 2rem;">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">❓</div>
-                    <p class="text-muted" style="font-size: 1.1rem;">No assignment yet. Admin needs to generate
-                        assignments first!</p>
+                    <p class="text-muted" style="font-size: 1.1rem;">No assignment yet. Admin needs to generate assignments first!</p>
                 </div>
             </div>
 
+            <div class="card">
+                <div class="card-header">My Wishlist</div>
+                <div id="myWishlistDisplay" style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px; min-height: 100px;">
+                    <p class="text-muted text-center">No wishlist created yet. Click the button above to add one!</p>
+                </div>
+            </div>
         </div>
 
         <!-- Admin Panel -->
@@ -645,10 +612,8 @@
                 <div class="card-header">
                     👑 Admin Dashboard
                     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="btn btn-primary btn-small" onclick="openModal('participantModal')">➕ Add
-                            Participant</button>
-                        <button class="btn btn-success btn-small" onclick="generateAssignments()">🎲 Generate
-                            Assignments</button>
+                        <button class="btn btn-primary btn-small" onclick="openModal('participantModal')">➕ Add Participant</button>
+                        <button class="btn btn-success btn-small" onclick="generateAssignments()">🎲 Generate Assignments</button>
                     </div>
                 </div>
 
@@ -671,8 +636,7 @@
             <div class="card">
                 <div class="card-header">
                     Exchange Settings
-                    <button class="btn btn-secondary btn-small" onclick="openModal('settingsModal')">⚙️ Edit
-                        Settings</button>
+                    <button class="btn btn-secondary btn-small" onclick="openModal('settingsModal')">⚙️ Edit Settings</button>
                 </div>
 
                 <div class="two-column">
@@ -682,8 +646,7 @@
                     </div>
                     <div>
                         <label style="font-weight: 600; display: block; margin-bottom: 0.5rem;">📅 Exchange Date</label>
-                        <input type="text" id="exchangeDateDisplay" disabled style="background: var(--light-bg);"
-                            value="Not Set">
+                        <input type="text" id="exchangeDateDisplay" disabled style="background: var(--light-bg);" value="Not Set">
                     </div>
                 </div>
             </div>
@@ -694,6 +657,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Assigned To</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -701,8 +665,7 @@
                     </thead>
                     <tbody id="participantTableBody">
                         <tr>
-                            <td colspan="4" class="text-center text-muted">No participants yet. Add one to get started!
-                            </td>
+                            <td colspan="5" class="text-center text-muted">No participants yet. Add one to get started!</td>
                         </tr>
                     </tbody>
                 </table>
@@ -711,8 +674,7 @@
             <div class="card">
                 <div class="card-header">Secret Santa Pairings</div>
                 <div id="pairingsContainer">
-                    <p class="text-muted text-center" style="padding: 2rem;">No assignments generated yet. Click
-                        "Generate Assignments" above!</p>
+                    <p class="text-muted text-center" style="padding: 2rem;">No assignments generated yet. Click "Generate Assignments" above!</p>
                 </div>
             </div>
         </div>
@@ -727,13 +689,29 @@
             </div>
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" id="participantName" placeholder="e.g., Juan Dela Cruz" required>
+                <input type="text" id="participantName" placeholder="e.g., Juan Dela Cruz">
             </div>
             <div class="form-group">
-                <label>Email (Optional)</label>
+                <label>Email</label>
                 <input type="email" id="participantEmail" placeholder="e.g., juan@example.com">
             </div>
             <button class="btn btn-primary" onclick="addParticipant()" style="width: 100%;">Add Participant</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div id="wislistModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                📝 My Wishlist
+                <button class="modal-close" onclick="closeModal('wislistModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label>What would you like to receive? (One item per line)</label>
+                <textarea id="wishlistInput" rows="6" placeholder="Example:&#10;- Blue T-shirt (Size M)&#10;- Coffee maker&#10;- Book: &quot;Your Favorite&quot;&#10;- Chocolate assortment"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="saveWishlist()" style="width: 100%; margin-bottom: 0.5rem;">Save Wishlist</button>
+            <button class="btn btn-secondary" onclick="closeModal('wislistModal')" style="width: 100%;">Close</button>
         </div>
     </div>
 
@@ -757,20 +735,23 @@
     </div>
 
     <script>
-        // API Base URL
-        const API_BASE = 'bunutan_app/api.php';
-
-        // Get token from URL for participant view
-        const urlParams = new URLSearchParams(window.location.search);
-        const userToken = urlParams.get('token');
+        // Storage Keys
+        const STORAGE_PARTICIPANTS = 'bunutan_participants';
+        const STORAGE_ASSIGNMENTS = 'bunutan_assignments';
+        const STORAGE_WISHLISTS = 'bunutan_wishlists';
+        const STORAGE_SETTINGS = 'bunutan_settings';
+        const STORAGE_USER_ID = 'bunutan_user_id';
 
         // Initialize App
-        async function initApp() {
-            await loadSettings();
-            await loadParticipants();
-            await updateAdminDashboard();
-            if (userToken) {
-                await loadUserAssignment();
+        function initApp() {
+            try {
+                loadSettings();
+                loadParticipants();
+                updateAdminDashboard();
+                loadUserAssignment();
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                alert('Error initializing app. Please refresh the page.');
             }
         }
 
@@ -778,7 +759,7 @@
         function switchTab(tabName) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
+            
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
         }
@@ -792,124 +773,135 @@
             document.getElementById(modalId).classList.remove('active');
         }
 
-        // API Helper
-        async function apiCall(action, method = 'GET', data = null) {
-            const options = {
-                method: method,
-                headers: { 'Content-Type': 'application/json' }
-            };
-            if (data && method !== 'GET') {
-                options.body = JSON.stringify(data);
-            }
-            try {
-                const response = await fetch(`${API_BASE}?action=${action}`, options);
-                return await response.json();
-            } catch (error) {
-                console.error('API Error:', error);
-                return { success: false, message: 'Network error occurred' };
-            }
-        }
-
         // Settings Management
-        async function loadSettings() {
-            const result = await apiCall('get_settings');
-            if (result.success) {
-                const settings = result.settings;
-                const budget = settings.budget || 1000;
-                const exchangeDate = settings.exchange_date || '2024-12-25';
-
+        function loadSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem(STORAGE_SETTINGS)) || {
+                    budget: 1000,
+                    exchangeDate: '2025-12-25'
+                };
+                
+                const budget = parseInt(settings.budget) || 1000;
+                const exchangeDate = settings.exchangeDate || '2025-12-25';
+                
                 document.getElementById('budgetDisplay').value = budget;
                 document.getElementById('budgetInput').value = budget;
                 document.getElementById('exchangeDateDisplay').value = exchangeDate;
                 document.getElementById('exchangeDateInput').value = exchangeDate;
+            } catch (error) {
+                console.error('Error loading settings:', error);
+                document.getElementById('budgetDisplay').value = 1000;
+                document.getElementById('budgetInput').value = 1000;
+                document.getElementById('exchangeDateDisplay').value = '2025-12-25';
+                document.getElementById('exchangeDateInput').value = '2025-12-25';
             }
         }
 
-        async function saveSettings() {
-            const budget = parseInt(document.getElementById('budgetInput').value);
-            const exchangeDate = document.getElementById('exchangeDateInput').value;
+        function saveSettings() {
+            try {
+                const budgetInput = document.getElementById('budgetInput').value.trim();
+                const exchangeDateInput = document.getElementById('exchangeDateInput').value.trim();
 
-            if (!budget || budget < 0 || !exchangeDate) {
-                alert('Please fill all fields with valid values');
-                return;
-            }
+                if (!budgetInput || !exchangeDateInput) {
+                    alert('Please fill all fields with valid values');
+                    return;
+                }
 
-            // Store in gift rules for now (backend doesn't have separate budget/date fields)
-            const rules = `Budget: ₱${budget}\nExchange Date: ${exchangeDate}`;
-            const result = await apiCall('set_gift_rules', 'POST', { rules });
+                const budget = parseInt(budgetInput);
+                
+                if (isNaN(budget) || budget < 0) {
+                    alert('Please enter a valid budget amount');
+                    return;
+                }
 
-            if (result.success) {
-                await loadSettings();
+                if (!exchangeDateInput.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    alert('Please select a valid date');
+                    return;
+                }
+
+                const settings = { 
+                    budget: budget, 
+                    exchangeDate: exchangeDateInput 
+                };
+                
+                localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(settings));
+                loadSettings();
                 closeModal('settingsModal');
                 alert('Settings updated successfully!');
-            } else {
-                alert(result.message || 'Failed to save settings');
+            } catch (error) {
+                console.error('Error saving settings:', error);
+                alert('Error saving settings. Please try again.');
             }
         }
 
         // Participant Management
-        async function addParticipant() {
+        function addParticipant() {
             const name = document.getElementById('participantName').value.trim();
             const email = document.getElementById('participantEmail').value.trim();
 
-            if (!name) {
-                alert('Please enter a name');
+            if (!name || !email) {
+                alert('Please fill all fields');
                 return;
             }
 
-            const result = await apiCall('add_participant', 'POST', { name });
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const participant = {
+                id: Date.now(),
+                name,
+                email,
+                joinDate: new Date().toLocaleDateString()
+            };
 
-            if (result.success) {
-                closeModal('participantModal');
-                await loadParticipants();
-                await updateAdminDashboard();
-                alert('Participant added successfully!');
-                document.getElementById('participantName').value = '';
-                document.getElementById('participantEmail').value = '';
-            } else {
-                alert(result.message || 'Failed to add participant');
-            }
+            participants.push(participant);
+            localStorage.setItem(STORAGE_PARTICIPANTS, JSON.stringify(participants));
+
+            closeModal('participantModal');
+            loadParticipants();
+            updateAdminDashboard();
+            alert('Participant added successfully!');
+            document.getElementById('participantName').value = '';
+            document.getElementById('participantEmail').value = '';
         }
 
-        async function deleteParticipant(id) {
+        function deleteParticipant(id) {
             if (!confirm('Are you sure? This will also delete any assignments.')) return;
-
-            const result = await apiCall('delete_participant', 'POST', { id });
-
-            if (result.success) {
-                await loadParticipants();
-                await updateAdminDashboard();
-            } else {
-                alert(result.message || 'Failed to delete participant');
-            }
+            
+            let participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            let assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
+            
+            participants = participants.filter(p => p.id !== id);
+            assignments = assignments.filter(a => a.fromId !== id && a.toId !== id);
+            
+            localStorage.setItem(STORAGE_PARTICIPANTS, JSON.stringify(participants));
+            localStorage.setItem(STORAGE_ASSIGNMENTS, JSON.stringify(assignments));
+            
+            loadParticipants();
+            updateAdminDashboard();
         }
 
-        async function loadParticipants() {
-            const result = await apiCall('get_participants');
+        function loadParticipants() {
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
             const tbody = document.getElementById('participantTableBody');
 
-            if (!result.success || !result.participants || result.participants.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No participants yet. Add one to get started!</td></tr>';
-                document.getElementById('totalParticipants').textContent = '0';
+            if (participants.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No participants yet. Add one to get started!</td></tr>';
                 return;
             }
 
-            const participants = result.participants;
-            const drawsResult = await apiCall('get_draw');
-            const draws = drawsResult.success ? drawsResult.draws : [];
-
             tbody.innerHTML = participants.map(p => {
-                const assignment = draws.find(d => d.giver_id === p.id);
-                const assignedTo = assignment ? assignment.receiver_name : 'Not assigned';
+                const assignment = assignments.find(a => a.fromId === p.id);
+                const assignedTo = assignment ? participants.find(pa => pa.id === assignment.toId)?.name : 'Not assigned';
                 const statusBadge = assignment ? '<span class="badge badge-success">✓ Assigned</span>' : '<span class="badge badge-warning">⏳ Pending</span>';
-
+                
                 return `
                     <tr>
                         <td>${p.name}</td>
+                        <td>${p.email}</td>
                         <td>${assignedTo}</td>
                         <td>${statusBadge}</td>
                         <td>
-                            <button class="btn btn-danger btn-small" onclick="deleteParticipant('${p.id}')">Delete</button>
+                            <button class="btn btn-danger btn-small" onclick="deleteParticipant(${p.id})">Delete</button>
                         </td>
                     </tr>
                 `;
@@ -919,10 +911,9 @@
         }
 
         // Assignment Management
-        async function generateAssignments() {
-            const participantsResult = await apiCall('get_participants');
-            const participants = participantsResult.success ? participantsResult.participants : [];
-
+        function generateAssignments() {
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            
             if (participants.length < 2) {
                 alert('You need at least 2 participants to generate assignments');
                 return;
@@ -930,28 +921,34 @@
 
             if (!confirm(`Generate Secret Santa assignments for ${participants.length} participants?`)) return;
 
-            const result = await apiCall('generate_draw', 'POST');
+            const shuffled = [...participants].sort(() => Math.random() - 0.5);
+            const assignments = [];
 
-            if (result.success) {
-                await loadParticipants();
-                await updateAdminDashboard();
-                alert('Assignments generated successfully! 🎄');
-            } else {
-                alert(result.message || 'Failed to generate assignments');
+            for (let i = 0; i < shuffled.length; i++) {
+                const nextIndex = (i + 1) % shuffled.length;
+                assignments.push({
+                    fromId: shuffled[i].id,
+                    toId: shuffled[nextIndex].id,
+                    purchased: false
+                });
             }
+
+            localStorage.setItem(STORAGE_ASSIGNMENTS, JSON.stringify(assignments));
+            loadParticipants();
+            updateAdminDashboard();
+            displayPairings();
+            alert('Assignments generated successfully! 🎄');
         }
 
-        async function displayPairings() {
-            const drawsResult = await apiCall('get_draw');
+        function displayPairings() {
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
             const container = document.getElementById('pairingsContainer');
 
-            if (!drawsResult.success || !drawsResult.draws || drawsResult.draws.length === 0) {
+            if (assignments.length === 0) {
                 container.innerHTML = '<p class="text-muted text-center" style="padding: 2rem;">No assignments generated yet.</p>';
                 return;
             }
-
-            const draws = drawsResult.draws;
-            const baseUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, '') + 'bunutan_app/index.php';
 
             container.innerHTML = `
                 <table class="table">
@@ -961,123 +958,170 @@
                             <th>→</th>
                             <th>🎁 To (Recipient)</th>
                             <th>Status</th>
-                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${draws.map(d => {
-                const status = d.revealed ? '<span class="badge badge-success">✓ Revealed</span>' : '<span class="badge badge-warning">⏳ Not Revealed</span>';
-                const link = `${baseUrl}?token=${d.token}`;
-                return `
+                        ${assignments.map(a => {
+                            const from = participants.find(p => p.id === a.fromId);
+                            const to = participants.find(p => p.id === a.toId);
+                            const status = a.purchased ? '<span class="badge badge-success">✓ Purchased</span>' : '<span class="badge badge-warning">⏳ Pending</span>';
+                            return `
                                 <tr>
-                                    <td>${d.giver_name}</td>
+                                    <td>${from?.name || 'Unknown'}</td>
                                     <td style="text-align: center;">→</td>
-                                    <td>${d.receiver_name}</td>
+                                    <td>${to?.name || 'Unknown'}</td>
                                     <td>${status}</td>
-                                    <td>
-                                        <button class="btn btn-primary btn-small" onclick="copyLink('${link}')">Copy Link</button>
-                                    </td>
                                 </tr>
                             `;
-            }).join('')}
+                        }).join('')}
                     </tbody>
                 </table>
             `;
         }
 
-        function copyLink(link) {
-            navigator.clipboard.writeText(link).then(() => {
-                alert('Link copied to clipboard!');
-            }).catch(() => {
-                alert('Failed to copy link');
-            });
-        }
-
-        async function updateAdminDashboard() {
-            const statsResult = await apiCall('get_statistics');
-
-            if (statsResult.success) {
-                const stats = statsResult.statistics;
-                document.getElementById('assignmentStatus').textContent = stats.total_draws || 0;
-                document.getElementById('purchasedCount').textContent = stats.revealed_count || 0;
-            }
-
-            await displayPairings();
+        function updateAdminDashboard() {
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
+            
+            document.getElementById('assignmentStatus').textContent = assignments.length;
+            document.getElementById('purchasedCount').textContent = assignments.filter(a => a.purchased).length;
+            
+            displayPairings();
         }
 
         // User Assignment View
-        async function loadUserAssignment() {
-            if (!userToken) {
-                document.getElementById('assignmentContainer').style.display = 'none';
-                document.getElementById('noAssignmentContainer').style.display = 'block';
-                return;
+        function loadUserAssignment() {
+            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID)) || null;
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
+            const settings = JSON.parse(localStorage.getItem(STORAGE_SETTINGS)) || { budget: 1000, exchangeDate: '2024-12-25' };
+
+            if (!userId) {
+                const firstParticipant = participants[0];
+                if (firstParticipant) {
+                    localStorage.setItem(STORAGE_USER_ID, JSON.stringify(firstParticipant.id));
+                    loadUserAssignment();
+                    return;
+                }
             }
 
-            const result = await apiCall('reveal_partner', 'POST', { token: userToken });
+            const userAssignment = assignments.find(a => a.fromId === userId);
             const assignmentContainer = document.getElementById('assignmentContainer');
             const noAssignmentContainer = document.getElementById('noAssignmentContainer');
 
-            if (!result.success) {
+            if (!userAssignment) {
                 assignmentContainer.style.display = 'none';
                 noAssignmentContainer.style.display = 'block';
-                noAssignmentContainer.innerHTML = `
-                    <div style="text-align: center; padding: 2rem;">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">❌</div>
-                        <p class="text-muted" style="font-size: 1.1rem;">${result.message || 'Invalid or expired link'}</p>
-                    </div>
-                `;
                 return;
             }
 
-            const settingsResult = await apiCall('get_settings');
-            const settings = settingsResult.success ? settingsResult.settings : {};
-            const budgetMatch = settings.gift_value_rules ? settings.gift_value_rules.match(/Budget:\s*₱?(\d+)/i) : null;
-            const budget = budgetMatch ? budgetMatch[1] : 1000;
-            const dateMatch = settings.gift_value_rules ? settings.gift_value_rules.match(/Exchange Date:\s*(.+)/i) : null;
-            const exchangeDate = dateMatch ? dateMatch[1] : 'TBD';
+            const recipient = participants.find(p => p.id === userAssignment.toId);
+            if (!recipient) return;
 
             assignmentContainer.style.display = 'block';
             noAssignmentContainer.style.display = 'none';
 
-            document.getElementById('recipientName').textContent = result.receiver_name;
-            document.getElementById('recipientBudget').textContent = budget;
-            document.getElementById('exchangeDate').textContent = exchangeDate;
-            document.getElementById('purchaseStatus').textContent = result.revealed_at ? '✓ Revealed' : '⏳ Not Revealed';
-            document.getElementById('purchaseStatus').className = result.revealed_at ? 'badge badge-success' : 'badge badge-warning';
+            document.getElementById('recipientName').textContent = recipient.name;
+            document.getElementById('recipientBudget').textContent = settings.budget;
+            document.getElementById('exchangeDate').textContent = settings.exchangeDate;
+            document.getElementById('purchaseStatus').textContent = userAssignment.purchased ? '✓ Purchased' : '⏳ Not Purchased';
+            document.getElementById('purchaseStatus').className = userAssignment.purchased ? 'badge badge-success' : 'badge badge-warning';
 
-            // Display gift rules
-            if (result.gift_rules) {
-                document.getElementById('wishlistDisplay').innerHTML = `<p style="white-space: pre-line;">${result.gift_rules}</p>`;
-            }
+            loadWishlists();
         }
 
-        // Wishlist Management (stored in gift rules for now)
+        // Wishlist Management
         function saveWishlist() {
+            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
             const wishlist = document.getElementById('wishlistInput').value.trim();
-            // Note: This would need a new API endpoint for wishlists
-            // For now, we'll just show a message
-            alert('Wishlist feature coming soon! For now, you can add gift preferences in the gift rules section.');
+
+            if (!wishlist) {
+                alert('Please add at least one item to your wishlist');
+                return;
+            }
+
+            const wishlists = JSON.parse(localStorage.getItem(STORAGE_WISHLISTS)) || {};
+            wishlists[userId] = wishlist;
+            localStorage.setItem(STORAGE_WISHLISTS, JSON.stringify(wishlists));
+
             closeModal('wislistModal');
+            loadWishlists();
+            alert('Wishlist saved successfully! 🎁');
         }
 
         function loadWishlists() {
-            // Wishlist feature not yet implemented in backend
-            document.getElementById('myWishlistDisplay').innerHTML = '<p class="text-muted text-center">Wishlist feature coming soon!</p>';
+            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            const wishlists = JSON.parse(localStorage.getItem(STORAGE_WISHLISTS)) || {};
+            const userWishlist = wishlists[userId] || '';
+            const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+
+            // My wishlist
+            const myWishlistDisplay = document.getElementById('myWishlistDisplay');
+            if (userWishlist) {
+                const items = userWishlist.split('\n').filter(item => item.trim());
+                myWishlistDisplay.innerHTML = `
+                    <ul style="list-style-position: inside; line-height: 2;">
+                        ${items.map(item => `<li>${item.trim()}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                myWishlistDisplay.innerHTML = '<p class="text-muted text-center">No wishlist created yet.</p>';
+            }
+
+            // Recipient wishlist
+            const userAssignment = assignments.find(a => a.fromId === userId);
+            if (userAssignment) {
+                const recipientWishlist = wishlists[userAssignment.toId] || '';
+                const wishlistDisplay = document.getElementById('wishlistDisplay');
+                if (recipientWishlist) {
+                    const items = recipientWishlist.split('\n').filter(item => item.trim());
+                    wishlistDisplay.innerHTML = `
+                        <ul style="list-style-position: inside; line-height: 2;">
+                            ${items.map(item => `<li>${item.trim()}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    wishlistDisplay.innerHTML = '<p class="text-muted text-center">No wishlist provided yet</p>';
+                }
+            }
+
+            // Load textarea
+            document.getElementById('wishlistInput').value = userWishlist;
         }
 
         function markPurchased() {
-            alert('Purchase tracking feature coming soon!');
+            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            let assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
+            const assignment = assignments.find(a => a.fromId === userId);
+
+            if (!assignment) return;
+
+            assignment.purchased = true;
+            localStorage.setItem(STORAGE_ASSIGNMENTS, JSON.stringify(assignments));
+            loadUserAssignment();
+            updateAdminDashboard();
+            alert('Great! You marked your gift as purchased! 🎉');
         }
 
         function resetStatus() {
-            alert('Status reset feature coming soon!');
+            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            let assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
+            const assignment = assignments.find(a => a.fromId === userId);
+
+            if (!assignment) return;
+
+            assignment.purchased = false;
+            localStorage.setItem(STORAGE_ASSIGNMENTS, JSON.stringify(assignments));
+            loadUserAssignment();
+            updateAdminDashboard();
         }
 
         // Initialize on load
         window.addEventListener('load', initApp);
 
         // Handle navigation and modals
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             if (e.target.classList.contains('nav-btn')) {
                 document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
@@ -1085,7 +1129,7 @@
         });
 
         document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function (e) {
+            modal.addEventListener('click', function(e) {
                 if (e.target === this) {
                     this.classList.remove('active');
                 }
@@ -1093,5 +1137,4 @@
         });
     </script>
 </body>
-
 </html>
