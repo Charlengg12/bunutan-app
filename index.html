@@ -550,7 +550,12 @@
             <div class="card">
                 <div class="card-header">
                     🎁 My Secret Santa Assignment
-                    <button class="btn btn-primary btn-small" onclick="openModal('wislistModal')">📝 Update Wishlist</button>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <select id="participantSelector" onchange="switchParticipant()" style="padding: 0.6rem 1rem; border-radius: 6px; border: 2px solid var(--border-color); font-weight: 600;">
+                            <option value="">Select Your Name...</option>
+                        </select>
+                        <button class="btn btn-primary btn-small" onclick="openModal('wislistModal')">📝 Update Wishlist</button>
+                    </div>
                 </div>
 
                 <div id="assignmentContainer" style="display: none;">
@@ -747,6 +752,7 @@
             try {
                 loadSettings();
                 loadParticipants();
+                loadParticipantSelector();
                 updateAdminDashboard();
                 loadUserAssignment();
             } catch (error) {
@@ -908,6 +914,7 @@
             }).join('');
 
             document.getElementById('totalParticipants').textContent = participants.length;
+            loadParticipantSelector();
         }
 
         // Assignment Management
@@ -989,20 +996,53 @@
             displayPairings();
         }
 
+        // Participant Selector Dropdown
+        function loadParticipantSelector() {
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const selector = document.getElementById('participantSelector');
+            
+            selector.innerHTML = '<option value="">Select Your Name...</option>';
+            
+            participants.forEach(p => {
+                const option = document.createElement('option');
+                option.value = p.id;
+                option.textContent = p.name;
+                selector.appendChild(option);
+            });
+
+            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            if (userId) {
+                selector.value = userId;
+            }
+        }
+
+        function switchParticipant() {
+            const selector = document.getElementById('participantSelector');
+            const userId = selector.value;
+
+            if (!userId) {
+                document.getElementById('assignmentContainer').style.display = 'none';
+                document.getElementById('noAssignmentContainer').style.display = 'block';
+                document.getElementById('noAssignmentContainer').innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">👤</div><p class="text-muted" style="font-size: 1.1rem;">Please select your name from the dropdown above</p></div>';
+                return;
+            }
+
+            localStorage.setItem(STORAGE_USER_ID, JSON.stringify(parseInt(userId)));
+            loadUserAssignment();
+        }
+
         // User Assignment View
         function loadUserAssignment() {
             const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID)) || null;
             const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
             const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
-            const settings = JSON.parse(localStorage.getItem(STORAGE_SETTINGS)) || { budget: 1000, exchangeDate: '2024-12-25' };
+            const settings = JSON.parse(localStorage.getItem(STORAGE_SETTINGS)) || { budget: 1000, exchangeDate: '2025-12-25' };
 
-            if (!userId) {
-                const firstParticipant = participants[0];
-                if (firstParticipant) {
-                    localStorage.setItem(STORAGE_USER_ID, JSON.stringify(firstParticipant.id));
-                    loadUserAssignment();
-                    return;
-                }
+            if (!userId || !participants.find(p => p.id === userId)) {
+                document.getElementById('assignmentContainer').style.display = 'none';
+                document.getElementById('noAssignmentContainer').style.display = 'block';
+                document.getElementById('noAssignmentContainer').innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">👤</div><p class="text-muted" style="font-size: 1.1rem;">Please select your name from the dropdown above</p></div>';
+                return;
             }
 
             const userAssignment = assignments.find(a => a.fromId === userId);
@@ -1012,6 +1052,7 @@
             if (!userAssignment) {
                 assignmentContainer.style.display = 'none';
                 noAssignmentContainer.style.display = 'block';
+                noAssignmentContainer.innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">❓</div><p class="text-muted" style="font-size: 1.1rem;">No assignment yet. Admin needs to generate assignments first!</p></div>';
                 return;
             }
 
