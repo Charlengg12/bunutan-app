@@ -486,17 +486,46 @@
         <div class="navbar-container">
             <div class="navbar-brand">Bunutan</div>
             <div class="nav-tabs">
-                <button class="nav-btn active" onclick="switchTab('home')">🏠 Home</button>
-                <button class="nav-btn" onclick="switchTab('participant')">🎁 My Gift</button>
-                <button class="nav-btn" onclick="switchTab('admin')">⚙️ Admin</button>
+                <button class="nav-btn active" onclick="switchTab('login')">🎄 Login</button>
+                <button class="nav-btn" onclick="switchTab('home')" id="homeNavBtn" style="display:none;">🏠 Home</button>
+                <button class="nav-btn" onclick="switchTab('participant')" id="participantNavBtn" style="display:none;">🎁 My Gift</button>
+                <button class="nav-btn" onclick="switchTab('admin')" id="adminNavBtn" style="display:none;">⚙️ Admin</button>
+                <button class="btn btn-secondary btn-small" onclick="logout()" id="logoutBtn" style="display:none; margin-left:auto;">🚪 Logout</button>
             </div>
         </div>
     </nav>
 
     <!-- Main Container -->
     <div class="container">
+        <!-- Login Section -->
+        <div id="login" class="section active">
+            <div class="card text-center" style="max-width: 500px; margin: 3rem auto;">
+                <div class="card-header" style="justify-content: center; font-size: 2rem;">
+                    🎄 Bunutan - Christmas Gift Exchange 🎄
+                </div>
+                <p style="font-size: 1rem; margin-bottom: 2rem; color: var(--text-light);">
+                    Welcome! Enter your name to join the Secret Santa exchange.
+                </p>
+                
+                <div class="form-group">
+                    <label style="font-size: 1.1rem;">Your Full Name</label>
+                    <input type="text" id="loginName" placeholder="e.g., Juan Dela Cruz" style="font-size: 1.1rem; padding: 1rem;">
+                </div>
+                
+                <button class="btn btn-primary" onclick="authenticateParticipant()" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+                    🎉 Enter Exchange
+                </button>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: var(--light-bg); border-radius: 8px; display:none;" id="tokenDisplay">
+                    <p style="color: var(--text-light); margin-bottom: 1rem;">Share this token with other participants:</p>
+                    <div style="background: var(--white); padding: 1rem; border-radius: 6px; word-break: break-all; font-family: monospace; font-size: 0.85rem; margin-bottom: 1rem;" id="tokenValue"></div>
+                    <button class="btn btn-success btn-small" onclick="copyToken()" style="width: 100%;">📋 Copy Token</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Home Section -->
-        <div id="home" class="section active">
+        <div id="home" class="section">
             <div class="card text-center">
                 <div class="card-header" style="justify-content: center;">
                     🎄 Bunutan - Christmas Gift Exchange 🎄
@@ -551,9 +580,7 @@
                 <div class="card-header">
                     🎁 My Secret Santa Assignment
                     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <select id="participantSelector" onchange="switchParticipant()" style="padding: 0.6rem 1rem; border-radius: 6px; border: 2px solid var(--border-color); font-weight: 600;">
-                            <option value="">Select Your Name...</option>
-                        </select>
+                        <button class="btn btn-success btn-small" onclick="openModal('joinModal')" id="joinExchangeBtn">🎲 Join Exchange Draw</button>
                         <button class="btn btn-primary btn-small" onclick="openModal('wislistModal')">📝 Update Wishlist</button>
                     </div>
                 </div>
@@ -616,10 +643,7 @@
             <div class="card">
                 <div class="card-header">
                     👑 Admin Dashboard
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button class="btn btn-primary btn-small" onclick="openModal('participantModal')">➕ Add Participant</button>
-                        <button class="btn btn-success btn-small" onclick="generateAssignments()">🎲 Generate Assignments</button>
-                    </div>
+                    <button class="btn btn-primary btn-small" onclick="openModal('participantModal')">➕ Add Participant</button>
                 </div>
 
                 <div class="grid">
@@ -685,7 +709,25 @@
         </div>
     </div>
 
-    <!-- Add Participant Modal -->
+    <!-- Join Exchange Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                🎲 Join Exchange Draw
+                <button class="modal-close" onclick="closeModal('joinModal')">&times;</button>
+            </div>
+            <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+                All registered participants will be randomly paired. Once you click below, the draw will be generated!
+            </p>
+            <div id="joinParticipantsList" style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto;">
+                <p class="text-muted text-center">Loading participants...</p>
+            </div>
+            <button class="btn btn-success" onclick="joinExchangeDraw()" style="width: 100%; margin-bottom: 0.5rem;">✓ Generate Draw</button>
+            <button class="btn btn-secondary" onclick="closeModal('joinModal')" style="width: 100%;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Add Participant Modal (Admin Only) -->
     <div id="participantModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -745,14 +787,65 @@
         const STORAGE_ASSIGNMENTS = 'bunutan_assignments';
         const STORAGE_WISHLISTS = 'bunutan_wishlists';
         const STORAGE_SETTINGS = 'bunutan_settings';
-        const STORAGE_USER_ID = 'bunutan_user_id';
+        const STORAGE_AUTH_TOKEN = 'bunutan_auth_token';
+        const STORAGE_DEVICE_ID = 'bunutan_device_id';
+
+        // JWT-like Token Generation (Simple but effective)
+        function generateToken(participantId, name) {
+            const deviceId = generateDeviceId();
+            const timestamp = Date.now();
+            const tokenData = {
+                pid: participantId,
+                name: name,
+                did: deviceId,
+                ts: timestamp
+            };
+            return btoa(JSON.stringify(tokenData));
+        }
+
+        function generateDeviceId() {
+            let deviceId = localStorage.getItem(STORAGE_DEVICE_ID);
+            if (!deviceId) {
+                deviceId = 'device_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+                localStorage.setItem(STORAGE_DEVICE_ID, deviceId);
+            }
+            return deviceId;
+        }
+
+        function verifyToken(token) {
+            try {
+                const decoded = JSON.parse(atob(token));
+                return decoded;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function getAuthToken() {
+            return localStorage.getItem(STORAGE_AUTH_TOKEN);
+        }
+
+        function isAuthenticated() {
+            return getAuthToken() !== null;
+        }
 
         // Initialize App
         function initApp() {
             try {
+                if (!isAuthenticated()) {
+                    showLoginPage();
+                    return;
+                }
+                
+                const token = verifyToken(getAuthToken());
+                if (!token) {
+                    logout();
+                    return;
+                }
+
+                showDashboard();
                 loadSettings();
                 loadParticipants();
-                loadParticipantSelector();
                 updateAdminDashboard();
                 loadUserAssignment();
             } catch (error) {
@@ -761,8 +854,75 @@
             }
         }
 
+        function showLoginPage() {
+            document.getElementById('login').classList.add('active');
+            document.getElementById('home').classList.remove('active');
+            document.getElementById('participant').classList.remove('active');
+            document.getElementById('admin').classList.remove('active');
+            document.getElementById('homeNavBtn').style.display = 'none';
+            document.getElementById('participantNavBtn').style.display = 'none';
+            document.getElementById('adminNavBtn').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('login').classList.remove('active');
+            document.getElementById('homeNavBtn').style.display = 'block';
+            document.getElementById('participantNavBtn').style.display = 'block';
+            document.getElementById('adminNavBtn').style.display = 'block';
+            document.getElementById('logoutBtn').style.display = 'block';
+        }
+
+        function authenticateParticipant() {
+            const name = document.getElementById('loginName').value.trim();
+            
+            if (!name) {
+                alert('Please enter your name');
+                return;
+            }
+
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            let participant = participants.find(p => p.name.toLowerCase() === name.toLowerCase());
+
+            if (!participant) {
+                participant = {
+                    id: Date.now(),
+                    name: name,
+                    email: '',
+                    joinDate: new Date().toLocaleDateString(),
+                    isAdmin: false
+                };
+                participants.push(participant);
+                localStorage.setItem(STORAGE_PARTICIPANTS, JSON.stringify(participants));
+            }
+
+            const token = generateToken(participant.id, participant.name);
+            localStorage.setItem(STORAGE_AUTH_TOKEN, token);
+
+            showDashboard();
+            initApp();
+            document.getElementById('loginName').value = '';
+        }
+
+        function logout() {
+            localStorage.removeItem(STORAGE_AUTH_TOKEN);
+            showLoginPage();
+        }
+
+        function copyToken() {
+            const token = getAuthToken();
+            navigator.clipboard.writeText(token).then(() => {
+                alert('Token copied to clipboard!');
+            });
+        }
+
         // Tab Switching
         function switchTab(tabName) {
+            if (!isAuthenticated() && tabName !== 'login') {
+                showLoginPage();
+                return;
+            }
+
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
@@ -996,63 +1156,79 @@
             displayPairings();
         }
 
-        // Participant Selector Dropdown
-        function loadParticipantSelector() {
+        // Join Exchange Draw
+        function joinExchangeDraw() {
             const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
-            const selector = document.getElementById('participantSelector');
             
-            selector.innerHTML = '<option value="">Select Your Name...</option>';
-            
-            participants.forEach(p => {
-                const option = document.createElement('option');
-                option.value = p.id;
-                option.textContent = p.name;
-                selector.appendChild(option);
-            });
-
-            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
-            if (userId) {
-                selector.value = userId;
-            }
-        }
-
-        function switchParticipant() {
-            const selector = document.getElementById('participantSelector');
-            const userId = selector.value;
-
-            if (!userId) {
-                document.getElementById('assignmentContainer').style.display = 'none';
-                document.getElementById('noAssignmentContainer').style.display = 'block';
-                document.getElementById('noAssignmentContainer').innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">👤</div><p class="text-muted" style="font-size: 1.1rem;">Please select your name from the dropdown above</p></div>';
+            if (participants.length < 2) {
+                alert('You need at least 2 participants to generate assignments');
                 return;
             }
 
-            localStorage.setItem(STORAGE_USER_ID, JSON.stringify(parseInt(userId)));
+            if (!confirm(`Generate Secret Santa assignments for ${participants.length} participants?`)) return;
+
+            const shuffled = [...participants].sort(() => Math.random() - 0.5);
+            const assignments = [];
+
+            for (let i = 0; i < shuffled.length; i++) {
+                const nextIndex = (i + 1) % shuffled.length;
+                assignments.push({
+                    fromId: shuffled[i].id,
+                    toId: shuffled[nextIndex].id,
+                    purchased: false
+                });
+            }
+
+            localStorage.setItem(STORAGE_ASSIGNMENTS, JSON.stringify(assignments));
+            loadParticipants();
+            updateAdminDashboard();
+            displayPairings();
+            closeModal('joinModal');
+            alert('Assignments generated successfully! 🎄');
             loadUserAssignment();
+        }
+
+        function loadJoinParticipantsList() {
+            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
+            const container = document.getElementById('joinParticipantsList');
+
+            if (participants.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center">No participants registered yet</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div style="line-height: 2;">
+                    ${participants.map(p => `<div>✓ ${p.name}</div>`).join('')}
+                </div>
+                <p class="text-muted" style="margin-top: 1rem; font-size: 0.9rem;">Total: ${participants.length} participants ready</p>
+            `;
         }
 
         // User Assignment View
         function loadUserAssignment() {
-            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID)) || null;
+            const token = verifyToken(getAuthToken());
+            if (!token) {
+                logout();
+                return;
+            }
+
+            const userId = token.pid;
             const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
             const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
             const settings = JSON.parse(localStorage.getItem(STORAGE_SETTINGS)) || { budget: 1000, exchangeDate: '2025-12-25' };
 
-            if (!userId || !participants.find(p => p.id === userId)) {
-                document.getElementById('assignmentContainer').style.display = 'none';
-                document.getElementById('noAssignmentContainer').style.display = 'block';
-                document.getElementById('noAssignmentContainer').innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">👤</div><p class="text-muted" style="font-size: 1.1rem;">Please select your name from the dropdown above</p></div>';
-                return;
-            }
-
-            const userAssignment = assignments.find(a => a.fromId === userId);
             const assignmentContainer = document.getElementById('assignmentContainer');
             const noAssignmentContainer = document.getElementById('noAssignmentContainer');
+
+            const userAssignment = assignments.find(a => a.fromId === userId);
 
             if (!userAssignment) {
                 assignmentContainer.style.display = 'none';
                 noAssignmentContainer.style.display = 'block';
-                noAssignmentContainer.innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">❓</div><p class="text-muted" style="font-size: 1.1rem;">No assignment yet. Admin needs to generate assignments first!</p></div>';
+                noAssignmentContainer.innerHTML = '<div style="text-align: center; padding: 2rem;"><div style="font-size: 3rem; margin-bottom: 1rem;">❓</div><p class="text-muted" style="font-size: 1.1rem;">No assignment yet. Click "Join Exchange Draw" to participate!</p></div>';
+                document.getElementById('joinExchangeBtn').style.display = 'block';
+                loadJoinParticipantsList();
                 return;
             }
 
@@ -1061,6 +1237,7 @@
 
             assignmentContainer.style.display = 'block';
             noAssignmentContainer.style.display = 'none';
+            document.getElementById('joinExchangeBtn').style.display = 'none';
 
             document.getElementById('recipientName').textContent = recipient.name;
             document.getElementById('recipientBudget').textContent = settings.budget;
@@ -1073,7 +1250,13 @@
 
         // Wishlist Management
         function saveWishlist() {
-            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            const token = verifyToken(getAuthToken());
+            if (!token) {
+                logout();
+                return;
+            }
+
+            const userId = token.pid;
             const wishlist = document.getElementById('wishlistInput').value.trim();
 
             if (!wishlist) {
@@ -1091,11 +1274,13 @@
         }
 
         function loadWishlists() {
-            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            const token = verifyToken(getAuthToken());
+            if (!token) return;
+
+            const userId = token.pid;
             const wishlists = JSON.parse(localStorage.getItem(STORAGE_WISHLISTS)) || {};
             const userWishlist = wishlists[userId] || '';
             const assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
-            const participants = JSON.parse(localStorage.getItem(STORAGE_PARTICIPANTS)) || [];
 
             // My wishlist
             const myWishlistDisplay = document.getElementById('myWishlistDisplay');
@@ -1132,7 +1317,13 @@
         }
 
         function markPurchased() {
-            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            const token = verifyToken(getAuthToken());
+            if (!token) {
+                logout();
+                return;
+            }
+
+            const userId = token.pid;
             let assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
             const assignment = assignments.find(a => a.fromId === userId);
 
@@ -1146,7 +1337,13 @@
         }
 
         function resetStatus() {
-            const userId = JSON.parse(localStorage.getItem(STORAGE_USER_ID));
+            const token = verifyToken(getAuthToken());
+            if (!token) {
+                logout();
+                return;
+            }
+
+            const userId = token.pid;
             let assignments = JSON.parse(localStorage.getItem(STORAGE_ASSIGNMENTS)) || [];
             const assignment = assignments.find(a => a.fromId === userId);
 
